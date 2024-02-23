@@ -3,12 +3,12 @@ class BlogPostsController < ApplicationController
   before_action :set_blog_post, only: [:show, :edit, :update, :destroy]
 
   def index
-    @blog_posts = BlogPost.published
     @blog_posts = user_signed_in? ? BlogPost.sorted : BlogPost.published.sorted
+    @pagy, @blog_posts = pagy(@blog_posts)
   end
 
   def show
-    @blog_post = BlogPost.published.find(params[:id])
+    @blog_post = BlogPost.find(params[:id])
   end
 
   def new
@@ -40,7 +40,7 @@ class BlogPostsController < ApplicationController
 
   private
     def blog_post_params
-      params.require(:blog_post).permit(:title, :body, :published_at)
+      params.require(:blog_post).permit(:title, :content, :published_at)
     end
 
     def set_blog_post

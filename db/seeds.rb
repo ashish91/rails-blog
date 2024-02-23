@@ -11,3 +11,12 @@ user.update!(
   password: "password",
   password_confirmation: "password"
 )
+
+blogs = [0, (100-BlogPost.count)].max
+blogs.times do |i|
+  BlogPost.create(
+    title: "Post #{i}",
+    content: "Hello World",
+    published_at: Time.current,
+  )
+end

@@ -9,6 +9,10 @@
       <div class="p-2 rounded bg-blue-100 text-blue-900">Scheduled</div>
     <% end %>
 
-    <%= blog_post.body %>
+    <%= blog_post.content %>
   </div>
 <% end %>
+
+<div class="my-16">
+  <%== pagy_nav(@pagy) if @pagy.pages > 1 %>
+</div>
